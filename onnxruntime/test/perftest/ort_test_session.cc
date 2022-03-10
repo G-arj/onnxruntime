@@ -406,9 +406,9 @@ OnnxRuntimeTestSession::OnnxRuntimeTestSession(Ort::Env& env, std::random_device
   if (performance_test_config.run_config.custom_op_lib_path.size() > 0) {
     void* lib_handle = nullptr;
 #ifdef _MSC_VER
-    std::string str_lib_path = ToUTF8String(performance_test_config.run_config.custom_op_lib_path);
+    const std::string str_lib_path = ToUTF8String(performance_test_config.run_config.custom_op_lib_path);
 #else
-    std::string& str_lib_path = performance_test_config.run_config.custom_op_lib_path;
+    const std::string& str_lib_path = performance_test_config.run_config.custom_op_lib_path;
 #endif
     Ort::ThrowOnError(Ort::GetApi().RegisterCustomOpsLibrary(session_options, str_lib_path.c_str(), &lib_handle));
   }
